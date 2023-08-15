@@ -2,6 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Aventure;
+use App\Entity\Groupe;
+use App\Entity\Joueur;
+use App\Entity\Personnage;
+use App\Entity\Skill;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -16,34 +21,23 @@ class DashboardController extends AbstractDashboardController
     #[Route(self::ROUTE_PATH_INDEX, name: self::ROUTE_NAME_INDEX)]
     public function index(): Response
     {
-        return parent::index();
-
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        // return $this->render('some/path/my-dashboard.html.twig');
+        return $this->render('admin/dashboard.html.twig');
     }
 
     public function configureDashboard(): Dashboard
     {
-        return Dashboard::new()
-            ->setTitle('Administration');
+        return Dashboard::new()->setTitle('Administration');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::section('Groupe de jeu');
+        yield MenuItem::linkToCrud('Groupes', 'fas fa-list', Groupe::class);
+        yield MenuItem::linkToCrud('Joueurs', 'fas fa-list', Joueur::class);
+        yield MenuItem::section('Données');
+        yield MenuItem::linkToCrud('Aventures', 'fas fa-list', Aventure::class);
+        yield MenuItem::linkToCrud('Personnages', 'fas fa-list', Personnage::class);
+        yield MenuItem::linkToCrud('Compétences', 'fas fa-list', Skill::class);
     }
 }
