@@ -3,7 +3,7 @@
 L'idée de ce projet c'est de permettre de préparer des aventures simples sans avoir de mécaniques trop complexes. Un administrateur doit pouvoir :
 - Créer des fiches de personnages avec de l'équipement, des statistiques et des compétences
 - Créer un groupe de joueurs auquels sont assignés des personnages
-- Créer une aventure, c'est à dire un ensemble de "cartes" aevc informations supplémentaires
+- Créer une aventure, c'est à dire un ensemble de "cartes" avec informations supplémentaires
 - Assigner un personnage à une carte, pour permettre la séparation d'un groupe
 
 La partie docker du projet est pour environnement de développement UNIQUEMENT !

@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Aventure;
 use App\Entity\Groupe;
 use App\Entity\Joueur;
+use App\Entity\Map;
+use App\Entity\Path;
 use App\Entity\Personnage;
 use App\Entity\Skill;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -37,6 +39,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Joueurs', 'fas fa-list', Joueur::class);
         yield MenuItem::section('Données');
         yield MenuItem::linkToCrud('Aventures', 'fas fa-list', Aventure::class);
+        yield MenuItem::linkToCrud('Cartes', 'fas fa-list', Map::class);
+        yield MenuItem::linkToCrud('Chemins', 'fas fa-list', Path::class);
         yield MenuItem::linkToCrud('Personnages', 'fas fa-list', Personnage::class);
         yield MenuItem::linkToCrud('Compétences', 'fas fa-list', Skill::class);
     }
