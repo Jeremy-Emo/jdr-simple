@@ -20,6 +20,14 @@ class Groupe
     #[ORM\OneToMany(mappedBy: 'groupe', targetEntity: Joueur::class)]
     private Collection $joueurs;
 
+    #[ORM\Column(length: 255)]
+    private string $nom;
+
+    public function __toString(): string
+    {
+        return $this->getNom();
+    }
+
     public function __construct()
     {
         $this->joueurs = new ArrayCollection();
@@ -56,6 +64,18 @@ class Groupe
                 $joueur->setGroupe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
 
         return $this;
     }

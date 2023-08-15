@@ -25,6 +25,11 @@ class Skill
     #[ORM\ManyToOne(inversedBy: 'skills')]
     private ?Personnage $personnage = null;
 
+    public function __toString(): string
+    {
+        return $this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -21,6 +21,11 @@ class Joueur
     #[ORM\ManyToOne(inversedBy: 'joueurs')]
     private ?Groupe $groupe = null;
 
+    public function __toString(): string
+    {
+        return $this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
