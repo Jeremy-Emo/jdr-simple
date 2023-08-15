@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Security\AppAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,9 +26,17 @@ class LoginController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', [
+        return $this->render('@EasyAdmin/page/login.html.twig', [
             'last_username' => $lastUsername,
             'error' => $error,
+
+            'csrf_token_intention' => 'authenticate',
+            'target_path' => $this->generateUrl(HomeController::ROUTE_NAME),
+            'username_label' => 'Utilisateur',
+            'password_label' => 'Mot de passe',
+            'sign_in_label' => 'Se connecter',
+            'username_parameter' => AppAuthenticator::IDENTIFIER_KEY,
+            'password_parameter' => AppAuthenticator::PASSWORD_KEY,
         ]);
     }
 }

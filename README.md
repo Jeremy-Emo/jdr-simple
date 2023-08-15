@@ -11,6 +11,9 @@ La partie docker du projet est pour environnement de développement UNIQUEMENT !
 # TODO :
 - Mettre en place des linters
 - Mettre en place des tests unitaires
+- Créer une interface admin (CRUD pour les différents types de données)
+- Interface MJ (gestion de groupes & personnages, gestion de cartes)
+- Interface publique (accès fiches de personnages)
 
 ## Setup du projet
 
@@ -35,6 +38,12 @@ npm run build
 ```bash
 docker-compose run php-apache php bin/console doctrine:database:create
 docker-compose run php-apache php bin/console doctrine:migrations:migrate
+```
+
+### Génération des assets EasyAdmin
+
+```bash
+docker-compose run php-apache php bin/console assets:install --symlink
 ```
 
 ### Création d'un administrateur
