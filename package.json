@@ -1,0 +1,18 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "watch": "CHOKIDAR_USEPOLLING=true vite build --watch"
+    },
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "vite": "^4.0",
+        "vite-plugin-symfony": "^4.0"
+    },
+    "dependencies": {
+        "@vitejs/plugin-vue": "^4.2.3",
+        "sass": "^1.65.1",
+        "typescript": "^5.1.6"
+    }
+}

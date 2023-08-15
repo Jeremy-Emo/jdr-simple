@@ -1,0 +1,33 @@
+---
+version: '3.8'
+
+services:
+  php-apache:
+    build: .docker/php-apache
+    container_name: php
+    volumes:
+      - ./:/var/www
+    ports:
+      - "80:80"
+
+  database:
+    image: mysql:8.0.31
+    container_name: database
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - data_mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.1.0
+    container_name: pma
+    environment:
+      - PMA_HOST=database
+    ports:
+      - "82:80"
+
+volumes:
+  data_mysql:
+    name: volume-database-jdr

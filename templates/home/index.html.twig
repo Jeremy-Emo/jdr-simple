@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+{% endblock %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div id="vue-app"></div>
+{% endblock %}
+
+{% block addCSS %}
+{% endblock %}
+
+{% block addJS %}
+    {{ vite_entry_script_tags('home') }}
+{% endblock %}
