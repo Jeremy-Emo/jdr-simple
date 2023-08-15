@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\AdminUserRepository;
@@ -25,7 +27,7 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        return ['ROLE_USER', 'ROLE_ADMIN'];
     }
 
     public function eraseCredentials()

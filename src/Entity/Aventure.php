@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Repository\JoueurRepository;
+use App\Repository\AventureRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: JoueurRepository::class)]
-class Joueur
+#[ORM\Entity(repositoryClass: AventureRepository::class)]
+class Aventure
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,8 +19,8 @@ class Joueur
     #[ORM\Column(length: 255)]
     private string $nom;
 
-    #[ORM\ManyToOne(inversedBy: 'joueurs')]
-    private ?Groupe $groupe = null;
+    #[ORM\Column(type: Types::TEXT)]
+    private string $synopsis = '';
 
     public function getId(): ?int
     {
@@ -38,14 +39,14 @@ class Joueur
         return $this;
     }
 
-    public function getGroupe(): ?Groupe
+    public function getSynopsis(): string
     {
-        return $this->groupe;
+        return $this->synopsis;
     }
 
-    public function setGroupe(?Groupe $groupe): static
+    public function setSynopsis(string $synopsis): static
     {
-        $this->groupe = $groupe;
+        $this->synopsis = $synopsis;
 
         return $this;
     }

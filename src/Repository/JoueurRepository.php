@@ -22,4 +22,12 @@ class JoueurRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Joueur::class);
     }
+
+    public function save(Joueur $joueur, bool $flush = true): void
+    {
+        $this->_em->persist($joueur);
+        if ($flush) {
+            $this->_em->flush();
+        }
+    }
 }
