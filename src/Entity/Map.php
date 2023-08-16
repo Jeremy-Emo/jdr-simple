@@ -34,6 +34,9 @@ class Map
     #[ORM\OneToMany(mappedBy: 'toMap', targetEntity: Path::class, orphanRemoval: true)]
     private Collection $pathsTo;
 
+    #[ORM\OneToMany(mappedBy: 'position', targetEntity: Joueur::class)]
+    private Collection $joueurs;
+
     public function __toString(): string
     {
         return $this->getNom();
@@ -43,6 +46,7 @@ class Map
     {
         $this->pathsFrom = new ArrayCollection();
         $this->pathsTo = new ArrayCollection();
+        $this->joueurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,6 +144,36 @@ class Map
             // set the owning side to null (unless already changed)
             if ($pathsTo->getToMap() === $this) {
                 $pathsTo->setToMap(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Joueur>
+     */
+    public function getJoueurs(): Collection
+    {
+        return $this->joueurs;
+    }
+
+    public function addJoueur(Joueur $joueur): static
+    {
+        if (!$this->joueurs->contains($joueur)) {
+            $this->joueurs->add($joueur);
+            $joueur->setPosition($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJoueur(Joueur $joueur): static
+    {
+        if ($this->joueurs->removeElement($joueur)) {
+            // set the owning side to null (unless already changed)
+            if ($joueur->getPosition() === $this) {
+                $joueur->setPosition(null);
             }
         }
 

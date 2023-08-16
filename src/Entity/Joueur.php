@@ -21,6 +21,9 @@ class Joueur
     #[ORM\ManyToOne(inversedBy: 'joueurs')]
     private ?Groupe $groupe = null;
 
+    #[ORM\ManyToOne(inversedBy: 'joueurs')]
+    private ?Map $position = null;
+
     public function __toString(): string
     {
         return $this->getNom();
@@ -51,6 +54,18 @@ class Joueur
     public function setGroupe(?Groupe $groupe): static
     {
         $this->groupe = $groupe;
+
+        return $this;
+    }
+
+    public function getPosition(): ?Map
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?Map $position): static
+    {
+        $this->position = $position;
 
         return $this;
     }

@@ -23,6 +23,9 @@ class Groupe
     #[ORM\Column(length: 255)]
     private string $nom;
 
+    #[ORM\OneToOne(inversedBy: 'groupe', cascade: ['persist', 'remove'])]
+    private ?Aventure $aventure = null;
+
     public function __toString(): string
     {
         return (string) $this->getNom();
@@ -68,7 +71,7 @@ class Groupe
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getNom(): string
     {
         return $this->nom;
     }
@@ -76,6 +79,18 @@ class Groupe
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getAventure(): ?Aventure
+    {
+        return $this->aventure;
+    }
+
+    public function setAventure(?Aventure $aventure): static
+    {
+        $this->aventure = $aventure;
 
         return $this;
     }

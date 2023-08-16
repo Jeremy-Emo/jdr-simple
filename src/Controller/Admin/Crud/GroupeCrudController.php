@@ -23,6 +23,7 @@ class GroupeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('nom');
+        yield AssociationField::new('aventure');
         yield AssociationField::new('joueurs')->hideOnIndex();
     }
 }

@@ -1,1 +1,9 @@
 {% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block main %}
+    <div id="vue-app"></div>
+{% endblock %}
+
+{% block body_javascript %}
+    {{ vite_entry_script_tags('adminDashboard') }}
+{% endblock body_javascript %}

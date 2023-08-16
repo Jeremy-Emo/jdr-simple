@@ -27,6 +27,9 @@ class Aventure
     #[ORM\OneToMany(mappedBy: 'aventure', targetEntity: Map::class)]
     private Collection $maps;
 
+    #[ORM\OneToOne(mappedBy: 'aventure', cascade: ['persist', 'remove'])]
+    private ?Groupe $groupe = null;
+
     public function __toString(): string
     {
         return $this->getNom();
@@ -92,6 +95,28 @@ class Aventure
                 $map->setAventure(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGroupe(): ?Groupe
+    {
+        return $this->groupe;
+    }
+
+    public function setGroupe(?Groupe $groupe): static
+    {
+        // unset the owning side of the relation if necessary
+        if (null === $groupe && null !== $this->groupe) {
+            $this->groupe->setAventure(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if (null !== $groupe && $groupe->getAventure() !== $this) {
+            $groupe->setAventure($this);
+        }
+
+        $this->groupe = $groupe;
 
         return $this;
     }

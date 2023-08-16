@@ -12,6 +12,7 @@ export default defineConfig({
             input: {
                 app: "./assets/app.ts",
                 home: "./assets/home.ts",
+                adminDashboard: "./assets/admin/dashboard.ts"
             },
         }
     },
