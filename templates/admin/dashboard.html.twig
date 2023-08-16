@@ -4,6 +4,11 @@
     <div id="vue-app"></div>
 {% endblock %}
 
+{% block head_stylesheets %}
+    <link rel="stylesheet" href="{{ asset('app.css', ea.assets.defaultAssetPackageName) }}">
+    {{ vite_entry_link_tags('adminDashboard') }}
+{% endblock %}
+
 {% block body_javascript %}
     {{ vite_entry_script_tags('adminDashboard') }}
 {% endblock body_javascript %}

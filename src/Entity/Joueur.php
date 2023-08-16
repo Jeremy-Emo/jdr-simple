@@ -24,6 +24,9 @@ class Joueur
     #[ORM\ManyToOne(inversedBy: 'joueurs')]
     private ?Map $position = null;
 
+    #[ORM\OneToOne(inversedBy: 'joueur', cascade: ['persist', 'remove'])]
+    private ?Personnage $selectedPersonnage = null;
+
     public function __toString(): string
     {
         return $this->getNom();
@@ -66,6 +69,18 @@ class Joueur
     public function setPosition(?Map $position): static
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getSelectedPersonnage(): ?Personnage
+    {
+        return $this->selectedPersonnage;
+    }
+
+    public function setSelectedPersonnage(?Personnage $selectedPersonnage): static
+    {
+        $this->selectedPersonnage = $selectedPersonnage;
 
         return $this;
     }

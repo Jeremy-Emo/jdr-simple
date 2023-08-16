@@ -42,6 +42,14 @@ class Personnage
     #[ORM\Column(type: Types::TEXT)]
     private string $description = '';
 
+    #[ORM\OneToOne(mappedBy: 'selectedPersonnage', cascade: ['persist', 'remove'])]
+    private ?Joueur $joueur = null;
+
+    public function __toString(): string
+    {
+        return $this->getNom();
+    }
+
     public function __construct()
     {
         $this->skills = new ArrayCollection();
@@ -162,6 +170,28 @@ class Personnage
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getJoueur(): ?Joueur
+    {
+        return $this->joueur;
+    }
+
+    public function setJoueur(?Joueur $joueur): static
+    {
+        // unset the owning side of the relation if necessary
+        if (null === $joueur && null !== $this->joueur) {
+            $this->joueur->setSelectedPersonnage(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if (null !== $joueur && $joueur->getSelectedPersonnage() !== $this) {
+            $joueur->setSelectedPersonnage($this);
+        }
+
+        $this->joueur = $joueur;
 
         return $this;
     }

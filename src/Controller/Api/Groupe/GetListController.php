@@ -19,7 +19,7 @@ class GetListController extends AbstractController
 
     public function __invoke(GroupeRepository $repository, GroupeMapper $mapper): ArrayCollection
     {
-        $groupes = $repository->findAll();
+        $groupes = $repository->findAllForHome();
 
         $response = new ArrayCollection();
         foreach ($groupes as $groupe) {

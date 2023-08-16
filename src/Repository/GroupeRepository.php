@@ -30,4 +30,15 @@ class GroupeRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    /**
+     * @return Groupe[]
+     */
+    public function findAllForHome(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('g')
+            ->andWhere('g.aventure is not null');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }
