@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Mapper;
+namespace App\Mapper;
 
 use App\Dto\Groupe as GroupeDto;
 use App\Entity\Groupe;

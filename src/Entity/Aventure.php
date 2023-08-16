@@ -99,6 +99,15 @@ class Aventure
         return $this;
     }
 
+    public function getStartMap(): ?Map
+    {
+        $startMap = $this->getMaps()->filter(function (Map $map) {
+            return $map->isInitialMap();
+        });
+
+        return false !== $startMap->first() ? $startMap->first() : null;
+    }
+
     public function getGroupe(): ?Groupe
     {
         return $this->groupe;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Mapper;
+namespace App\Mapper;
 
 use App\Dto\Aventure as AventureDto;
 use App\Dto\Joueur as JoueurDto;
@@ -45,7 +45,8 @@ class AventureMapper
         return (new JoueurDto())
             ->setNom($entity->getNom())
             ->setId((int) $entity->getId())
-            ->setPersonnage($this->mapPersonnage($entity->getSelectedPersonnage()));
+            ->setPersonnage($this->mapPersonnage($entity->getSelectedPersonnage()))
+            ->setMapId($entity->getPosition()?->getId());
     }
 
     private function mapPersonnage(?Personnage $entity): PersonnageDto

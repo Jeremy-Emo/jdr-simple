@@ -9,6 +9,7 @@ class Joueur
     private int $id;
     private string $nom;
     private Personnage $personnage;
+    private ?int $mapId;
 
     public function getId(): int
     {
@@ -42,6 +43,18 @@ class Joueur
     public function setPersonnage(Personnage $personnage): Joueur
     {
         $this->personnage = $personnage;
+
+        return $this;
+    }
+
+    public function getMapId(): ?int
+    {
+        return $this->mapId;
+    }
+
+    public function setMapId(?int $mapId): Joueur
+    {
+        $this->mapId = $mapId;
 
         return $this;
     }

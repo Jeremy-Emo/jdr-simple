@@ -9,7 +9,11 @@
     </p>
     <div v-if="aventure" class="mt-3">
       <p>Aventure actuelle : {{aventure.nom}}</p>
-      <player-card v-for="joueur in aventure.joueurs" :key="joueur" :joueur="joueur" />
+      <p>{{ aventure.synopsis }}</p>
+      <player-card v-for="joueur in aventure.joueurs" :key="joueur" :joueur="joueur" @click="onShowMap(joueur.mapId)" />
+    </div>
+    <div v-if="map" class="mt-3">
+      {{map.nom}}
     </div>
   </div>
 </template>
@@ -19,6 +23,7 @@ import { ref, onMounted } from "vue"
 import { getGroupes } from "../../composables/api/getGroupes";
 import {getAventure} from "../../composables/api/getAventure";
 import PlayerCard from "../../components/player-card.vue";
+import {getMap} from "../../composables/api/getMap";
 
 const groupes = ref([]);
 
@@ -32,6 +37,16 @@ const aventure = ref(null)
 const onGroupeChoice = async () => {
   if (selectedGroupe.value !== null) {
     aventure.value = await getAventure(selectedGroupe.value.aventureId)
+  }
+}
+
+const map = ref(null)
+
+const onShowMap = async (mapId: number|null|undefined) => {
+  if (mapId) {
+    map.value = await getMap(mapId)
+  } else {
+    map.value = null
   }
 }
 

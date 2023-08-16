@@ -7,6 +7,7 @@ export type Joueur = {
     id: number
     nom: string
     personnage: Personnage
+    mapId?: number
 }
 
 export type Aventure = {

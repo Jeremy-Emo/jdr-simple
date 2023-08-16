@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\Api\Aventure;
 
-use App\Controller\Mapper\AventureMapper;
 use App\Entity\Aventure;
+use App\Mapper\AventureMapper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

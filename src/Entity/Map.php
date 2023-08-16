@@ -28,14 +28,14 @@ class Map
     #[ORM\Column(type: Types::TEXT)]
     private string $infos = '';
 
-    #[ORM\OneToMany(mappedBy: 'fromMap', targetEntity: Path::class, orphanRemoval: true)]
-    private Collection $pathsFrom;
-
-    #[ORM\OneToMany(mappedBy: 'toMap', targetEntity: Path::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'toMap', targetEntity: Path::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $pathsTo;
 
     #[ORM\OneToMany(mappedBy: 'position', targetEntity: Joueur::class)]
     private Collection $joueurs;
+
+    #[ORM\Column]
+    private bool $initialMap = false;
 
     public function __toString(): string
     {
@@ -44,7 +44,6 @@ class Map
 
     public function __construct()
     {
-        $this->pathsFrom = new ArrayCollection();
         $this->pathsTo = new ArrayCollection();
         $this->joueurs = new ArrayCollection();
     }
@@ -86,36 +85,6 @@ class Map
     public function setInfos(string $infos): static
     {
         $this->infos = $infos;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Path>
-     */
-    public function getPathsFrom(): Collection
-    {
-        return $this->pathsFrom;
-    }
-
-    public function addPathsFrom(Path $pathsFrom): static
-    {
-        if (!$this->pathsFrom->contains($pathsFrom)) {
-            $this->pathsFrom->add($pathsFrom);
-            $pathsFrom->setFromMap($this);
-        }
-
-        return $this;
-    }
-
-    public function removePathsFrom(Path $pathsFrom): static
-    {
-        if ($this->pathsFrom->removeElement($pathsFrom)) {
-            // set the owning side to null (unless already changed)
-            if ($pathsFrom->getFromMap() === $this) {
-                $pathsFrom->setFromMap(null);
-            }
-        }
 
         return $this;
     }
@@ -176,6 +145,18 @@ class Map
                 $joueur->setPosition(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isInitialMap(): bool
+    {
+        return $this->initialMap;
+    }
+
+    public function setInitialMap(bool $initialMap): static
+    {
+        $this->initialMap = $initialMap;
 
         return $this;
     }

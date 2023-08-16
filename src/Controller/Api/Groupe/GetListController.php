@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Api\Groupe;
 
-use App\Controller\Mapper\GroupeMapper;
+use App\Mapper\GroupeMapper;
 use App\Repository\GroupeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

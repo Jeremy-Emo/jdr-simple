@@ -16,10 +16,6 @@ class Path
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pathsFrom')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Map $fromMap = null;
-
     #[ORM\ManyToOne(inversedBy: 'pathsTo')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Map $toMap = null;
@@ -27,21 +23,13 @@ class Path
     #[ORM\Column(type: Types::TEXT)]
     private string $infos = '';
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Map $fromMap = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getFromMap(): ?Map
-    {
-        return $this->fromMap;
-    }
-
-    public function setFromMap(?Map $fromMap): static
-    {
-        $this->fromMap = $fromMap;
-
-        return $this;
     }
 
     public function getToMap(): ?Map
@@ -64,6 +52,18 @@ class Path
     public function setInfos(string $infos): static
     {
         $this->infos = $infos;
+
+        return $this;
+    }
+
+    public function getFromMap(): ?Map
+    {
+        return $this->fromMap;
+    }
+
+    public function setFromMap(?Map $fromMap): static
+    {
+        $this->fromMap = $fromMap;
 
         return $this;
     }
