@@ -16,6 +16,9 @@ class AdminUserEventSubscriber implements EventSubscriberInterface
     {
     }
 
+    /**
+     * @return string[]
+     */
     public function getSubscribedEvents(): array
     {
         return [

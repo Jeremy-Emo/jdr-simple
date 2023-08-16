@@ -19,9 +19,9 @@ class RenderApiViewSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @return array<string, array<int, array<int, int|string>>>
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::VIEW => [

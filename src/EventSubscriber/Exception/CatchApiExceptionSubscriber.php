@@ -12,13 +12,13 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class CatchApiExceptionSubscriber implements EventSubscriberInterface
 {
     /**
-     * {@inheritDoc}
+     * @return array<string, array<int, array<int, int|string>>>
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::EXCEPTION => [
-                ['onException', 150]
+                ['onException', 150],
             ],
         ];
     }

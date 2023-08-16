@@ -25,12 +25,15 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
 
     private ?string $plainPassword = null;
 
+    /**
+     * @return string[]
+     */
     public function getRoles(): array
     {
         return ['ROLE_USER', 'ROLE_ADMIN'];
     }
 
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // TODO: Implement eraseCredentials() method.
     }

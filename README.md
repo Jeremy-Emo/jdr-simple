@@ -9,8 +9,6 @@ L'idée de ce projet c'est de permettre de préparer des aventures simples sans 
 La partie docker du projet est pour environnement de développement UNIQUEMENT !
 
 # TODO :
-- Mettre en place des linters
-- Mettre en place des tests unitaires
 - Interface MJ (gestion de groupes & personnages, gestion de cartes)
 - Interface publique (accès fiches de personnages)
 
@@ -45,8 +43,29 @@ docker-compose run --rm php-apache php bin/console doctrine:migrations:migrate
 docker-compose run --rm php-apache php bin/console assets:install --symlink
 ```
 
+## Commandes
+
 ### Création d'un administrateur
 
 ```bash
 docker-compose run --rm php-apache php bin/console admin:create
+```
+
+### Lancement des linters
+
+```bash
+# Fix automatique phpcsfixer
+docker-compose run --rm php-apache php vendor/bin/php-cs-fixer fix
+# phpcsfixer
+docker-compose run --rm php-apache php vendor/bin/php-cs-fixer fix --dry-run --diff
+# PHP_CodeSniffer
+docker-compose run --rm php-apache php vendor/bin/phpcs
+# PhpStan
+docker-compose run --rm php-apache php vendor/bin/phpstan
+```
+
+### Lancement des tests unitaires
+
+```bash
+docker-compose run --rm php-apache composer vendor/bin/phpunit
 ```

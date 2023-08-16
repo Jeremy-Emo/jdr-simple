@@ -31,21 +31,22 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public function authenticate(Request $request): Passport
     {
-        $username = $request->request->get(self::IDENTIFIER_KEY, '');
+        $username = (string) $request->request->get(self::IDENTIFIER_KEY, '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $username);
 
         return new Passport(
             new UserBadge($username),
-            new PasswordCredentials($request->request->get(self::PASSWORD_KEY, '')),
+            new PasswordCredentials((string) $request->request->get(self::PASSWORD_KEY, '')),
             [
-                new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),            ]
+                new CsrfTokenBadge('authenticate', (string) $request->request->get('_csrf_token')),            ]
         );
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+        $targetPath = $this->getTargetPath($request->getSession(), $firewallName);
+        if (null !== $targetPath) {
             return new RedirectResponse($targetPath);
         }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin\Crud;
 
 use App\Entity\Personnage;
+use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
@@ -18,6 +19,9 @@ class PersonnageCrudController extends AbstractCrudController
         return Personnage::class;
     }
 
+    /**
+     * @return iterable<FieldInterface>
+     */
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('nom');
