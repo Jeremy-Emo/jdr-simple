@@ -17,14 +17,14 @@ class Path
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'pathsTo')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: 'to_map_id', nullable: false)]
     private ?Map $toMap = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private string $infos = '';
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'pathsFrom')]
+    #[ORM\JoinColumn(name: 'from_map_id', nullable: false)]
     private ?Map $fromMap = null;
 
     public function getId(): ?int

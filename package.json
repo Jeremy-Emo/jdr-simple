@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "watch": "CHOKIDAR_USEPOLLING=true vite build --watch"
+        "watch": "vite build --watch"
     },
     "license": "UNLICENSED",
     "devDependencies": {

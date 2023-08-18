@@ -31,6 +31,9 @@ class Map
     #[ORM\OneToMany(mappedBy: 'toMap', targetEntity: Path::class, cascade: ['persist'], orphanRemoval: true)]
     private Collection $pathsTo;
 
+    #[ORM\OneToMany(mappedBy: 'fromMap', targetEntity: Path::class, cascade: ['persist'], orphanRemoval: true)]
+    private Collection $pathsFrom;
+
     #[ORM\OneToMany(mappedBy: 'position', targetEntity: Joueur::class)]
     private Collection $joueurs;
 
@@ -44,6 +47,7 @@ class Map
 
     public function __construct()
     {
+        $this->pathsFrom = new ArrayCollection();
         $this->pathsTo = new ArrayCollection();
         $this->joueurs = new ArrayCollection();
     }
@@ -113,6 +117,36 @@ class Map
             // set the owning side to null (unless already changed)
             if ($pathsTo->getToMap() === $this) {
                 $pathsTo->setToMap(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Path>
+     */
+    public function getPathsFrom(): Collection
+    {
+        return $this->pathsFrom;
+    }
+
+    public function addPathsFrom(Path $pathsFrom): static
+    {
+        if (!$this->pathsFrom->contains($pathsFrom)) {
+            $this->pathsFrom->add($pathsFrom);
+            $pathsFrom->setToMap($this);
+        }
+
+        return $this;
+    }
+
+    public function removePathsFrom(Path $pathsFrom): static
+    {
+        if ($this->pathsFrom->removeElement($pathsFrom)) {
+            // set the owning side to null (unless already changed)
+            if ($pathsFrom->getToMap() === $this) {
+                $pathsFrom->setToMap(null);
             }
         }
 

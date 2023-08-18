@@ -13,24 +13,35 @@ use App\Entity\Map;
 use App\Entity\Path;
 use App\Entity\Personnage;
 use App\Exception\AppException;
+use App\Repository\PathRepository;
 use Doctrine\Common\Collections\Collection;
 
 class MapMapper
 {
+    public function __construct(private PathRepository $pathRepository)
+    {
+    }
+
     public function map(Map $entity): MapDto
     {
+        $pathsTo = $this->pathRepository->findBy([
+            'fromMap' => $entity,
+        ]);
+
         return (new MapDto())
             ->setNom($entity->getNom())
             ->setId((int) $entity->getId())
             ->setInfos($entity->getInfos())
             ->setJoueurs($this->mapJoueurs($entity->getJoueurs()))
-            ->setPaths($this->mapPaths($entity->getPathsTo()));
+            ->setPaths($this->mapPaths($pathsTo));
     }
 
     /**
+     * @param iterable<Path> $paths
+     *
      * @return PathDto[]
      */
-    private function mapPaths(Collection $paths): array
+    private function mapPaths(iterable $paths): array
     {
         $array = [];
 

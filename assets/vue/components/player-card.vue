@@ -26,6 +26,7 @@ const hover = ref(false)
     display: inline-block;
     margin: 2px;
     position: relative;
+    cursor: pointer;
 
     span {
       display: inline-block;
@@ -35,6 +36,7 @@ const hover = ref(false)
       padding: 5px 15px;
       top: 30px;
       left: 5px;
+      z-index: 10;
     }
   }
 </style>

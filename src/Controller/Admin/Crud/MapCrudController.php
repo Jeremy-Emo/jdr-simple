@@ -32,7 +32,6 @@ class MapCrudController extends AbstractCrudController
         yield CollectionField::new('pathsTo')
             ->allowAdd()
             ->allowDelete()
-            ->setEntryIsComplex(true)
             ->setEntryType(PathType::class)
             ->hideOnIndex();
         yield TextareaField::new('infos')->hideOnIndex();
