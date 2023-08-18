@@ -8,6 +8,7 @@ class Path
 {
     private string $infos;
     private int $toId;
+    private string $mapName;
 
     public function getInfos(): string
     {
@@ -29,6 +30,18 @@ class Path
     public function setToId(int $toId): Path
     {
         $this->toId = $toId;
+
+        return $this;
+    }
+
+    public function getMapName(): string
+    {
+        return $this->mapName;
+    }
+
+    public function setMapName(string $mapName): Path
+    {
+        $this->mapName = $mapName;
 
         return $this;
     }

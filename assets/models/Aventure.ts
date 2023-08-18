@@ -1,6 +1,10 @@
 export type Personnage = {
     nom: string
     job: string
+    force: number
+    esprit: number
+    agilite: number
+    charisme: number
 }
 
 export type Joueur = {

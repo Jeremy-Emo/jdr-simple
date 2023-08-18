@@ -5,7 +5,11 @@
       @mouseleave="hover = false"
   >
     {{ joueur.nom }}
-    <span v-if="hover">{{ joueur.personnage.nom }} ({{ joueur.personnage.job }})</span>
+    <span v-if="hover">
+      {{ joueur.personnage.nom }} ({{ joueur.personnage.job }})<br>
+      Force : {{ joueur.personnage.force }} / Agilité : {{ joueur.personnage.agilite }}<br>
+      Esprit : {{ joueur.personnage.esprit }} / Charisme : {{ joueur.personnage.charisme }}<br>
+    </span>
   </div>
 </template>
 
@@ -31,12 +35,13 @@ const hover = ref(false)
     span {
       display: inline-block;
       background-color: #ddd;
-      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
       position: absolute;
       padding: 5px 15px;
       top: 30px;
       left: 5px;
       z-index: 10;
+      width: 250px;
     }
   }
 </style>

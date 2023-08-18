@@ -11,4 +11,5 @@ export type Map = {
 export type Path = {
     toId: number
     infos: string
+    mapName: string
 }

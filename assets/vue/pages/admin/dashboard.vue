@@ -15,7 +15,14 @@
     </div>
     <hr>
     <div v-if="map" class="mt-3">
-        <map-infos :map="map" :previous-map="previousMap" @move-to="previousMap = map; onShowMap($event)" />
+        <map-infos
+            :map="map"
+            :previous-map="previousMap"
+            :joueurs="aventure.joueurs"
+            @move-to="previousMap = map; onShowMap($event)"
+            @move-player="movePlayer($event)"
+            @move-all="movePlayer('all')"
+        />
     </div>
   </div>
 </template>
@@ -27,6 +34,7 @@ import {getAventure} from "../../composables/api/getAventure";
 import PlayerCard from "../../components/player-card.vue";
 import {getMap} from "../../composables/api/getMap";
 import MapInfos from "../../components/map-infos.vue";
+import {useMovePlayer} from "../../composables/api/useMovePlayer";
 
 const groupes = ref([]);
 
@@ -51,6 +59,18 @@ const onShowMap = async (mapId: number|null|undefined) => {
     map.value = await getMap(mapId)
   } else {
     map.value = null
+  }
+}
+
+const movePlayer = async (playerId: string|number|null) => {
+  if (playerId !== null) {
+    if (playerId === 'all') {
+      aventure.value.joueurs.forEach((joueur) => {
+        useMovePlayer(joueur.id, map.value.id)
+      })
+    } else {
+      await useMovePlayer(Number(playerId), map.value.id)
+    }
   }
 }
 

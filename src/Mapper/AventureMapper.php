@@ -55,6 +55,12 @@ class AventureMapper
             throw new AppException('Le joueur doit avoir un personnage pour faire partie d\'une aventure');
         }
 
-        return (new PersonnageDto())->setJob($entity->getJob())->setNom($entity->getNom());
+        return (new PersonnageDto())
+            ->setJob($entity->getJob())
+            ->setNom($entity->getNom())
+            ->setForce($entity->getStatForce())
+            ->setEsprit($entity->getStatEsprit())
+            ->setAgilite($entity->getStatAgilite())
+            ->setCharisme($entity->getStatCharisme());
     }
 }

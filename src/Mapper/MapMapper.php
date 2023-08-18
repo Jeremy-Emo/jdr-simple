@@ -56,7 +56,8 @@ class MapMapper
     {
         return (new PathDto())
             ->setInfos($entity->getInfos())
-            ->setToId((int) $entity->getToMap()?->getId());
+            ->setToId((int) $entity->getToMap()?->getId())
+            ->setMapName((string) $entity->getToMap()?->getNom());
     }
 
     /**
